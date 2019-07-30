@@ -1,28 +1,28 @@
 pipeline {
     agent any
+    tools {
+        maven 'Maven3.6.1'
+        jdk 'JDK1.8'
+    }
     stages {
-        stage('Clean and CLone') {
+        stage ('Initialize') {
             steps {
-                sh "rm -rf sample-boot-jenkins"
-                sh "git clone https://github.com/Sri2614/sample-boot-jenkins.git"
-                sh "mvn clean -f sample-boot-jenkins"
+                sh '''
+                    echo "PATH = ${PATH}"
+                    echo "M2_HOME = ${M2_HOME}"
+                '''
             }
         }
-        stage('Install') {
+
+        stage ('Build') {
             steps {
-                sh "mvn install -f sample-boot-jenkins"
+                sh 'mvn -Dmaven.test.failure.ignore=true install' 
             }
-        }
-        stage('Test') {
-            steps {
-                sh "mvn test -f sample-boot-jenkins"
-            }
-        }
-        stage('Example package') {
-            steps {
-                sh "mvn package -f sample-boot-jenkins"
+            post {
+                success {
+                    junit 'target/surefire-reports/**/*.xml' 
+                }
             }
         }
     }
 }
-
