@@ -10,7 +10,7 @@ pipeline {
                 }
                 steps {
                     sh 'java -version'
-                    sh 'mvn -version
+                    sh 'mvn -version'
                 }
             }
            
