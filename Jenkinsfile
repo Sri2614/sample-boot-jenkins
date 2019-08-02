@@ -8,6 +8,7 @@ pipeline {
                 sh 'docker --version'
                 sh 'docker pull nginx'
                 sh 'docker pull openjdk'
+                sh 'docker login'
                 sh 'docker push sribalaji/nginx'
                 
             }
