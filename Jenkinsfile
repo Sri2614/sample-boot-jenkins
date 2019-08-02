@@ -7,6 +7,7 @@ pipeline {
                 sh 'mvn -version'
                 sh 'docker --version'
                 sh 'docker pull nginx'
+                sh 'docker push nginx'
             }
             
         }
