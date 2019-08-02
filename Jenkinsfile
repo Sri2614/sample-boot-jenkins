@@ -6,7 +6,7 @@ pipeline {
                 sh 'java -version'
                 sh 'mvn -version'
                 sh 'docker --version'
-                
+                sh 'docker pull nginx'
             }
             
         }
